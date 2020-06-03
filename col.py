@@ -12,7 +12,7 @@ print(proc.recv(timeout = 0))
 
 
 # by reading col.c we can see lines from 4-11 a loop for deviding the value we enter into 5 peices and they
-# should in total == hex(0x21DD09EC)=568134124
+# should be in total == hex(0x21DD09EC)=568134124
 
 # print 'value of hashcode 0x21DD09EC in int = 568134124 \n'
 #
